@@ -1,0 +1,24 @@
+.tabs__item span {
+	z-index: 2;
+	position: relative;
+}
+.tabs__items {
+	display: flex;
+}
+.tabs__item {
+	flex: 0 1 33.333%;
+	height: 44px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-transform: uppercase;
+	text-decoration: none;
+	padding: 10px;
+	border: 1px solid;
+	border-bottom: 0;
+	border-left: 0;
+	color: gray;
+}
+.tabs__item:last-child {
+	border-right: 0;
+}
