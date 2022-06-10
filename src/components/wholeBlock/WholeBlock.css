@@ -82,3 +82,8 @@ form {
 	width: 600px;
 	height: 45px;
 }
+.img-search {
+	position: absolute;
+	left: 92%;
+	top: 25%;
+}

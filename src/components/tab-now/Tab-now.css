@@ -67,3 +67,9 @@
 			.tabs__block:target {
 				display: block;
 			}
+			.cloudy {
+				height: auto;
+				position: absolute;
+				left: 102px;
+				top: 33px;
+			}

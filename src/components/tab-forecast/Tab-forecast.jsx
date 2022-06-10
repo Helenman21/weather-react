@@ -1,22 +1,34 @@
 import React from "react";
 import './Tab-forecast.css'
-function TabForecast(){
+function TabForecast({ value, tabForecast }) {
+	let count = 100;
+	const elements = tabForecast.map(({ tempForecast,
+		dateForecast,
+		feelsLikeForecast,
+		iconForecast,
+		cloudinessForecast,
+		clockForecast }) => {
+return (<div key={count++} className="tabs__weather">
+		<div key={count++} className="tabs__date">{dateForecast}</div>
+		<div key={count++} className="tabs__clock">{clockForecast}</div>
+		<div key={count++} className="tabs__temperatures">{`Temperature: ${tempForecast}°`}</div>
+		<div key={count++} className="tabs__likes">{`Feelse like: ${feelsLikeForecast}°`}</div>
+		<div key={count++} className="tabs__rain">{cloudinessForecast}</div>
+		<img key={count++} className="img-rain" src={iconForecast} alt="дождь" />
+</div>)
+})
 	return (
 		<div id="tab_03" className="tabs__block">
-							<div className="scroll">
-								<div className="tabs__sity-name months">Krasnoyarsk</div>
-								<div id="cloneForecast" className="tabs__sity-name ">
-									<div className="tabs__weather">
-										<div className="tabs__date">00.12.00</div>
-										<div className="tabs__clock">11:11</div>
-										<div className="tabs__temperatures">14&deg;</div>
-										<div className="tabs__likes">&hearts;</div>
-										<div className="tabs__rain"></div>
-										<img className="img-rain" src="" alt="дождь" />
-									</div>
-								</div>
-							</div>
-						</div>
+			<div className="scroll">
+				<div className="tabs__sity-name months">{value}</div>
+				<div id="cloneForecast" className="tabs__sity-name ">
+					{elements}
+				</div>
+			</div>
+		</div>
 	)
 }
+
+
 export default TabForecast;
+
