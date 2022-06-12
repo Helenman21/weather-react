@@ -11,13 +11,15 @@ function Tabs({ value,
 						sunrise, 
 						sunset, 
 						weather,
-						tabForecast  
+						tabForecast,
+						addFavoritCity  
 						 }){
 	return(
 		<div className="first-block">
 			<TabNow value={ value } 
 					  temprature={ temprature } 
-					  icon={ icon } />
+					  icon={ icon }
+					  addFavoritCity={ addFavoritCity } />
 			<TabDetails value={ value } 
 							temprature={ temprature } 
 							feels_like={ feels_like }

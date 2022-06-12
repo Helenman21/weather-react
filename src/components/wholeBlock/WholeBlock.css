@@ -87,3 +87,6 @@ form {
 	left: 92%;
 	top: 25%;
 }
+.content__row {
+	display: flex;
+}

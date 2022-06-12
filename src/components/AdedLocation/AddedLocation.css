@@ -1,0 +1,43 @@
+.locations {
+	min-width: 300px;
+}
+.location__added {
+	height: 68px;
+	border: 1px solid;
+	border-left: 0;
+	border-top: 0;
+	border-right: 0;
+	padding-left: 18px;
+	padding-top: 33px;
+	font-size: 24px;
+	font-weight: 200;
+}
+.location__names {
+	font-size: 24px;
+	line-height: 28px;
+
+	font-weight: 200;
+	height: 320px;
+	width: 300px;
+}
+.location__name {
+	padding-left: 18px;
+	padding-top: 35px;
+	display: flex;
+	flex-direction: column;
+}
+
+.location__row {
+	margin-bottom: 15px;
+}
+.delete-sity {
+	cursor: pointer;
+	opacity: 0;
+}
+.delete-sity:hover {
+	opacity: 1;
+}
+.description {
+	cursor: pointer;
+	margin-left: 20px;
+}
