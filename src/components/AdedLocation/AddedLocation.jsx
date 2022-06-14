@@ -21,9 +21,9 @@ function AddedLocation({ favoritCity, deleteFavoritCity, handleOnSubmit }) {
 
 			<div className="location__names">
 				<div className="scroll add_template">
-					<template id="favorite-city" className="location__name">
+					<div className="location__name">
 						{elements}
-					</template>
+					</div>
 				</div>
 			</div>
 

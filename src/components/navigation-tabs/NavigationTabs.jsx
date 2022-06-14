@@ -1,11 +1,18 @@
 import React from "react";
-import './NavigationTabs.css'
-function NavigationTabs(){
-	return(
+import TabNow from "../tab-now/Tab-now";
+import './NavigationTabs.css';
+import { tabsActiv } from "../constans/constans";
+function NavigationTabs({ renderTabs, currentTab }) {
+	const clazzNameNotActive = "tabs__item";
+	const clazzNameActive = "tabs__item item-activ";
+	const classesTabNow = currentTab === tabsActiv.activTabNow ? clazzNameActive : clazzNameNotActive
+	const classesTabDetails = currentTab === tabsActiv.activTabDetails ? clazzNameActive : clazzNameNotActive;
+	const classesTabForecast = currentTab === tabsActiv.activTabForecast ? clazzNameActive : clazzNameNotActive
+	return (
 		<nav className="tabs__items">
-							<a href="#tab_01" className="tabs__item"> <span>Now</span> </a>
-							<a href="#tab_02" className="tabs__item"> <span>Details</span> </a>
-							<a href="#tab_03" className="tabs__item"> <span className="tab-forecast">Forecast</span> </a>
+			<span className={classesTabNow} onClick={() => renderTabs(tabsActiv.activTabNow)} > <p>Now</p></span>
+			<span className={classesTabDetails} onClick={() => renderTabs(tabsActiv.activTabDetails)} ><p>Details</p></span>
+			<span className={classesTabForecast} onClick={() => renderTabs(tabsActiv.activTabForecast)} ><p>Forecast</p></span>
 		</nav>
 	)
 }

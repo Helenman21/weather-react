@@ -6,8 +6,7 @@
 			
 			.image-weather {
 				width: 78px;
-				max-width: 78px;
-			
+				max-width: 78px;			
 				position: relative;
 			}
 			.sity-name {
@@ -38,18 +37,17 @@
 				display: flex;
 			}
 			.tabs__block {
-				/* display: none; */
 				position: relative;
 				height: 344px;
 			}
-			.tabs__block:before {
+			/* .tabs__block:before {
 				content: "";
 				height: 44px;
 				width: 33.333%;
 				position: absolute;
 				top: 344px;
-			}
-			.tabs__block:nth-child(1)::before {
+			} */
+			/* .tabs__block:nth-child(1)::before {
 				background-color: black;
 				color: white;
 				left: 0;
@@ -63,10 +61,10 @@
 				background-color: black;
 				color: white;
 				right: 0;
-			}
-			.tabs__block:target {
+			} */
+			/* .tabs__block:target {
 				display: block;
-			}
+			} */
 			.cloudy {
 				height: auto;
 				position: absolute;

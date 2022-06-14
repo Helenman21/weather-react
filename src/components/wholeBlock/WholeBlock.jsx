@@ -1,58 +1,51 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Tabs from "../tabs/Tabs";
 import SearchPanel from "../search-panel/Search-panel";
 import cloudy from '../img/cloudy.png'
 import './WholeBlock.css';
-import { fetchCity, fetchTabForecast } from '../DataRequest.js';
+import { fetchCity, fetchTabForecast } from '../DataRequest/DataRequest.js';
 import AddedLocation from "../AdedLocation/AddedLocation";
+import storage from "../DataRequest/localStorage.js"
 let idFavoritCity = 0;
 
 function WholeBlock() {
-	const [value, setValue] = useState('Красноярск')
-	const [temprature, setTemprature] = useState('0')
-	const [icon, setIcon] = useState(cloudy);
-	const [feels_like, setFeels_like] = useState('');
-	const [sunrise, setSunrise] = useState('');
-	const [sunset, setSunset] = useState('');
-	const [weather, setWeather] = useState('');
-	const [tabForecast, setTabForecast] = useState([]);
-	const [favoritCity, setFavoritCity] = useState([{ id: 509, nameCity: 'тула' }])
+	//const currentCity = storage.getCurrentCity() ?? 'Красноярск' ;
+	const [value, setValue] = useState('Красноярск');
+	const [dataWeather, setDataWeather] = useState(null);
+	const [arrayTabForecast, setArrayTabForecast] = useState([]);
+	const [favoritCity, setFavoritCity] = useState([{ id: 509, nameCity: 'тула' }]);
+	const [colorLike, setColorLike] = useState();
 	
-
 	const handleOnSubmit = (currentValue) => {
 		setValue(currentValue);
-		const dataTabNow_Details = fetchCity(currentValue)
+	}
+	useEffect(() => {
+		fetchCity(value)
 			.then((dataCity) => {
-				const {
-					temp,
-					icon,
-					feels_like,
-					sunrise,
-					sunset,
-					weather
-				} = dataCity;
-				setTemprature(temp);
-				setIcon(icon);
-				setFeels_like(feels_like);
-				setSunrise(sunrise);
-				setSunset(sunset);
-				setWeather(weather);
-			}
-
-			)
-		const dataTabForecast = fetchTabForecast(currentValue)
+				setDataWeather(dataCity);
+			})
+			colorHeartLike();
+		fetchTabForecast(value)
 			.then((dataForecast) => {
 				const newArrDataForecast = [...dataForecast];
-				setTabForecast(newArrDataForecast);
+				setArrayTabForecast(newArrDataForecast);
 			})
-	}
+	}, [ value ])
+
+	// function findCurrentCity(arr, name, currentValue){
+	// 	const isValid = arr.find(item => [item.name] === currentValue)
+	// 	return isValid
+	// }
 	const addFavoritCity = (itemCity) => {
-		const item = {
+		colorHeartLike()
+		const isValid = favoritCity.find(item => item.nameCity === value);
+		if(!isValid){const item = {
 			id: idFavoritCity++,
 			nameCity: itemCity
 		};
 		const newArrayCity = [...favoritCity, item];
-		setFavoritCity(newArrayCity);
+		setFavoritCity(newArrayCity);}
+		return;
 	}
 	const deleteFavoritCity = (id) => {
 		const index = favoritCity.findIndex((el) => el.id === id);
@@ -60,20 +53,27 @@ function WholeBlock() {
 		setFavoritCity(newArrayCity)
 
 	}
+	function colorHeartLike() {
+		const likeHeartFavorit = 'U+2661';
+		const notLikeHeartFavorit = 'U+2661';
+		const isValid = favoritCity.find(item => item.nameCity === value)
+		console.log(isValid)
+		if (isValid) {
+			setColorLike(likeHeartFavorit);
+		} if (!isValid) {
+			setColorLike(notLikeHeartFavorit);
+		}
+	};
 	return (
 		<div className="wrapper">
 			<div className="content" >
 				<SearchPanel handleOnSubmit={handleOnSubmit} />
 				<div className="content__row">
 					<Tabs value={value}
-						temprature={temprature}
-						icon={icon}
-						feels_like={feels_like}
-						sunrise={sunrise}
-						sunset={sunset}
-						weather={weather}
-						tabForecast={tabForecast}
+						dataWeather={ dataWeather }
+						arrayTabForecast={arrayTabForecast}
 						addFavoritCity={addFavoritCity}
+						colorLike={colorLike}
 					/>
 					<AddedLocation favoritCity={favoritCity}
 						deleteFavoritCity={deleteFavoritCity}

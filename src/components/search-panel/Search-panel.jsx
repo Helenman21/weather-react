@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import './Search-panel.css';
-//import img from '../img.serch.png'
+import search from '../img/search.png'
 
 function SearchPanel({ handleOnSubmit }) {
 	const [value, setValue] = useState('');
@@ -12,7 +12,7 @@ function SearchPanel({ handleOnSubmit }) {
 		<form className="form" action="#" onSubmit={ mySubmit }>
 			<input className="entry-field" value={value} onChange={(e) => setValue(e.target.value)} type="text" placeholder="Krasnoyarsk" />
 			<button>
-				<img className="img-search" src="" alt="поиск" />
+				<img className="img-search" src={ search } alt="поиск" />
 			</button>
 		</form>
 	)

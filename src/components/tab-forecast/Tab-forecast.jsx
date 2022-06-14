@@ -1,8 +1,8 @@
 import React from "react";
 import './Tab-forecast.css'
-function TabForecast({ value, tabForecast }) {
+function TabForecast({ value, arrayTabForecast }) {
 	let count = 100;
-	const elements = tabForecast.map(({ tempForecast,
+	const elements = arrayTabForecast.map(({ tempForecast,
 		dateForecast,
 		feelsLikeForecast,
 		iconForecast,

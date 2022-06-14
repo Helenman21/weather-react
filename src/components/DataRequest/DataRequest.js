@@ -1,5 +1,5 @@
 
- const apiKey = '1cc08bd1b174f9a8ac81c39323a93735';
+ const apiKey = '10f6c5de25c8d102cc9fbc3c7fb48592';
  const SERVER_URL = {
 	urlTabNow_tabDetails: 'http://api.openweathermap.org/data/2.5/weather',
 	urlTabForecast: 'http://api.openweathermap.org/data/2.5/forecast',
@@ -35,7 +35,7 @@ export async function fetchCity(cityName) {
 		const result = await handleFetch(url);
 		
 		return {
-			temp: degreСonversion(result?.main?.temp),
+			temperature: degreСonversion(result?.main?.temp),
 			feels_like: degreСonversion(result?.main?.feels_like),
 			weather: result?.weather?.length ? result?.weather[0]?.main : null,
 			icon: formatIcon(result?.weather?.length ? result?.weather[0]?.icon : null),
