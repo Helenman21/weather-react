@@ -1,5 +1,5 @@
 
- const apiKey = '10f6c5de25c8d102cc9fbc3c7fb48592';
+ const apiKey = '1cc08bd1b174f9a8ac81c39323a93735';
  const SERVER_URL = {
 	urlTabNow_tabDetails: 'http://api.openweathermap.org/data/2.5/weather',
 	urlTabForecast: 'http://api.openweathermap.org/data/2.5/forecast',

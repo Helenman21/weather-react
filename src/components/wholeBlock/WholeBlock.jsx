@@ -5,20 +5,34 @@ import cloudy from '../img/cloudy.png'
 import './WholeBlock.css';
 import { fetchCity, fetchTabForecast } from '../DataRequest/DataRequest.js';
 import AddedLocation from "../AdedLocation/AddedLocation";
-import storage from "../DataRequest/localStorage.js"
+import Storage from "../LocalStorage/LocalStorage";
 let idFavoritCity = 0;
 
 function WholeBlock() {
-	//const currentCity = storage.getCurrentCity() ?? 'Красноярск' ;
+	const currentCity = Storage.getCurrentCity() ?? 'Красноярск' ;
 	const [value, setValue] = useState('Красноярск');
 	const [dataWeather, setDataWeather] = useState(null);
 	const [arrayTabForecast, setArrayTabForecast] = useState([]);
 	const [favoritCity, setFavoritCity] = useState([{ id: 509, nameCity: 'тула' }]);
 	const [colorLike, setColorLike] = useState();
-	
+	console.log("currentCity: ",currentCity);
 	const handleOnSubmit = (currentValue) => {
 		setValue(currentValue);
+		Storage.saveCurrentCity(currentValue);
 	}
+	useEffect(() => {
+		fetchCity(currentCity)
+			.then((dataCity) => {
+				setDataWeather(dataCity);
+			})
+			colorHeartLike();
+		fetchTabForecast(currentCity)
+			.then((dataForecast) => {
+				const newArrDataForecast = [...dataForecast];
+				setArrayTabForecast(newArrDataForecast);
+			})
+	}, []);
+
 	useEffect(() => {
 		fetchCity(value)
 			.then((dataCity) => {
@@ -30,12 +44,8 @@ function WholeBlock() {
 				const newArrDataForecast = [...dataForecast];
 				setArrayTabForecast(newArrDataForecast);
 			})
-	}, [ value ])
-
-	// function findCurrentCity(arr, name, currentValue){
-	// 	const isValid = arr.find(item => [item.name] === currentValue)
-	// 	return isValid
-	// }
+	}, [ value ]);
+	
 	const addFavoritCity = (itemCity) => {
 		colorHeartLike()
 		const isValid = favoritCity.find(item => item.nameCity === value);
@@ -57,7 +67,6 @@ function WholeBlock() {
 		const likeHeartFavorit = 'U+2661';
 		const notLikeHeartFavorit = 'U+2661';
 		const isValid = favoritCity.find(item => item.nameCity === value)
-		console.log(isValid)
 		if (isValid) {
 			setColorLike(likeHeartFavorit);
 		} if (!isValid) {
