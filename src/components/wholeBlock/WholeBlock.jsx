@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Tabs from "../tabs/Tabs";
 import SearchPanel from "../search-panel/Search-panel";
 import cloudy from '../img/cloudy.png'
@@ -6,35 +6,25 @@ import './WholeBlock.css';
 import { fetchCity, fetchTabForecast } from '../DataRequest/DataRequest.js';
 import AddedLocation from "../AdedLocation/AddedLocation";
 import Storage from "../LocalStorage/LocalStorage";
+//import { formattingText } from "../Utils/Utils";
 let idFavoritCity = 0;
 
 function WholeBlock() {
-	const currentCity = Storage.getCurrentCity() ?? 'Красноярск' ;
-	const [value, setValue] = useState('Красноярск');
+	const [value, setValue] = useState(Storage.getCurrentCity() ?? 'Красноярск');
 	const [dataWeather, setDataWeather] = useState(null);
 	const [arrayTabForecast, setArrayTabForecast] = useState([]);
-	const [favoritCity, setFavoritCity] = useState([{ id: 509, nameCity: 'тула' }]);
+	const [favoritCity, setFavoritCity] = useState(Storage.getFavoriteCities() ?? [] );
 	const [colorLike, setColorLike] = useState();
-	console.log("currentCity: ",currentCity);
+	
+	const memoCity = useRef(null);
 	const handleOnSubmit = (currentValue) => {
 		setValue(currentValue);
 		Storage.saveCurrentCity(currentValue);
 	}
 	useEffect(() => {
-		fetchCity(currentCity)
-			.then((dataCity) => {
-				setDataWeather(dataCity);
-			})
-			colorHeartLike();
-		fetchTabForecast(currentCity)
-			.then((dataForecast) => {
-				const newArrDataForecast = [...dataForecast];
-				setArrayTabForecast(newArrDataForecast);
-			})
-	}, []);
-
-	useEffect(() => {
-		fetchCity(value)
+		if(memoCity.current !== value)
+		{	memoCity.current = value;
+			fetchCity(value)
 			.then((dataCity) => {
 				setDataWeather(dataCity);
 			})
@@ -43,17 +33,19 @@ function WholeBlock() {
 			.then((dataForecast) => {
 				const newArrDataForecast = [...dataForecast];
 				setArrayTabForecast(newArrDataForecast);
-			})
+			})}
 	}, [ value ]);
 	
 	const addFavoritCity = (itemCity) => {
 		colorHeartLike()
 		const isValid = favoritCity.find(item => item.nameCity === value);
-		if(!isValid){const item = {
+		if(!isValid){
+			const item = {
 			id: idFavoritCity++,
 			nameCity: itemCity
 		};
 		const newArrayCity = [...favoritCity, item];
+		Storage.saveFavoriteCities(newArrayCity)
 		setFavoritCity(newArrayCity);}
 		return;
 	}
@@ -64,8 +56,8 @@ function WholeBlock() {
 
 	}
 	function colorHeartLike() {
-		const likeHeartFavorit = 'U+2661';
-		const notLikeHeartFavorit = 'U+2661';
+		const likeHeartFavorit = "&#128420;";
+		const notLikeHeartFavorit = "&#9825;";
 		const isValid = favoritCity.find(item => item.nameCity === value)
 		if (isValid) {
 			setColorLike(likeHeartFavorit);

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import './Search-panel.css';
-import search from '../img/search.png'
+import search from '../img/search.png';
+import { formattingText } from "../Utils/Utils";
 
 function SearchPanel({ handleOnSubmit }) {
 	const [value, setValue] = useState('');
 	function mySubmit(e){
-		e.preventDefault();
-		handleOnSubmit(value);		
+		e.preventDefault();	
+		handleOnSubmit(formattingText(value))
 	}
 	return (
 		<form className="form" action="#" onSubmit={ mySubmit }>
