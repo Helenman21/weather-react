@@ -1,9 +1,8 @@
-import { useState } from 'react'
-import WholeBlock from './components/wholeBlock/wholeBlock'
-function App() {
-	
+import WholeBlock from './components/wholeBlock/wholeBlock';
 
-	return (
+
+function App() {
+		return (
 		<WholeBlock />
 	)
 }

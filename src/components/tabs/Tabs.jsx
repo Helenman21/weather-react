@@ -29,13 +29,13 @@ function Tabs({ value,
 						feels_like={feels_like}
 						sunrise={sunrise}
 						sunset={sunset}
-						weather={weather}						
+						weather={weather}
 					/>
 				)
 			case tabsActiv.activTabForecast:
 				return (
 					<TabForecast value={value}
-						arrayTabForecast={arrayTabForecast}						
+						arrayTabForecast={arrayTabForecast}
 					/>
 				)
 			default:
@@ -44,7 +44,7 @@ function Tabs({ value,
 						temperature={temperature}
 						icon={icon}
 						addFavoritCity={addFavoritCity}
-						colorLike={colorLike}						
+						colorLike={colorLike}
 					/>);
 		}
 	}
@@ -52,7 +52,7 @@ function Tabs({ value,
 		<div className="first-block">
 			{dataWeather && renderTabs()}
 			<NavigationTabs renderTabs={(name) => setCurrentTab(name)}
-								 currentTab={currentTab}	
+				currentTab={currentTab}
 			/>
 		</div>
 	)
