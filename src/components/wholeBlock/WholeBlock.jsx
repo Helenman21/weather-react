@@ -9,6 +9,9 @@ import { useDispatch } from "react-redux";
 import { setLikeColor } from '../../actions';
 import { сheckStatus } from '../Utils/Utils';
 import { colorLike } from "../constans/constans";
+
+
+
 function WholeBlock() {
 	const [dataWeather, setDataWeather] = useState(null);
 	const [arrayTabForecast, setArrayTabForecast] = useState([]);
@@ -46,6 +49,8 @@ function WholeBlock() {
 				</div>
 			</div>
 		</div>
+
+
 	)
 }
 export default WholeBlock;
